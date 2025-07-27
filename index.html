@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>やりたい事リスト（ジャンル選択＋年代別）</title>
+    <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2LM85GJN0L');
+  </script>
   <style>
     body {
       font-family: sans-serif;
@@ -111,14 +119,14 @@
 
   <div class="quick-form">
     <label for="quickTitle">やりたいこと（まずはこれだけでOK）</label>
-    <input type="text" id="quickTitle" placeholder="例：屋久島に行く">
+    <input type="text" id="quickTitle" placeholder="例：モルディブに行く">
     <button onclick="quickAdd()">追加</button>
   </div>
 
   <div class="bucket-section" id="bucketList"></div>
 
   <footer>
-    <p><a href="https://twitter.com/kkp_webninja" target="_blank">@kkp_webninja をフォロー</a><br><small>毎日ちょっとずつ夢に近づくヒントをお届け</small></p>
+    <p><a href="https://twitter.com/kkp_webninja" target="_blank">@kkp_webninja</a><br><small>ウェブアプリをお届け</small></p>
   </footer>
 
   <script>
