@@ -101,8 +101,8 @@
     }
     #footer {
       text-align: center;
-      margin-top: 3rem;
-      font-size: 0.9rem;
+      font-size: 0.9em;
+      margin-top: 40px;
       color: #555;
     }
     #footer a {
@@ -138,6 +138,7 @@
     quoteBox.textContent = quotes[Math.floor(Math.random() * quotes.length)];
 
     let data = JSON.parse(localStorage.getItem("bucketData") || "[]");
+    let editOpenIndex = null;
 
     function saveData() {
       localStorage.setItem("bucketData", JSON.stringify(data));
@@ -179,7 +180,7 @@
               <button onclick="remove(${index})">🗑 削除</button>
             </div>
             <div class="share-link" id="share${index}"></div>
-            <div class="edit-form" id="edit${index}" style="display:none">
+            <div class="edit-form" id="edit${index}" style="display:${editOpenIndex === index ? 'block' : 'none'}">
               <label>ジャンル</label>
               <select onchange="updateField(${index}, 'category', this.value)">
                 <option value="">選択してください</option>
@@ -192,7 +193,7 @@
                 <option value="挑戦" ${item.category === "挑戦" ? "selected" : ""}>挑戦</option>
               </select><br>
               <label>予定年齢</label>
-              <input type="number" value="${item.age}" onchange="updateField(${index}, 'age', this.value)"><br>
+              <input type="number" value="${item.age}" oninput="updateField(${index}, 'age', this.value)" min="0"><br>
               <label>メモ</label>
               <textarea onchange="updateField(${index}, 'memo', this.value)">${item.memo}</textarea><br>
               <button onclick="hideEdit(${index})">閉じる</button>
@@ -209,13 +210,17 @@
       data[index][field] = value;
       saveData();
       render();
+      if (editOpenIndex !== null) showEdit(editOpenIndex);
     }
 
     function showEdit(index) {
-      document.getElementById("edit" + index).style.display = "block";
+      editOpenIndex = index;
+      render();
     }
+
     function hideEdit(index) {
-      document.getElementById("edit" + index).style.display = "none";
+      if (editOpenIndex === index) editOpenIndex = null;
+      render();
     }
 
     function toggleDone(index) {
@@ -233,6 +238,7 @@
     function renderShareLink(index) {
       const item = data[index];
       const shareDiv = document.getElementById("share" + index);
+      if (!shareDiv) return;
       const text = encodeURIComponent(
         `${item.done ? `✅「${item.title}」達成！` : `📝「${item.title}」をやりたいことに追加！`}\n\n#やりたいことリスト\n#タイムバケット\nhttps://kkp-15.github.io/ninja-bucketlist/`
       );
