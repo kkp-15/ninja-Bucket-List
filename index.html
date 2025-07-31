@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>やりたい事リスト（ジャンル選択＋年代別）</title>
-    <!-- Google Analytics -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -99,13 +99,13 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    footer {
+    #footer {
       text-align: center;
       margin-top: 3rem;
       font-size: 0.9rem;
       color: #555;
     }
-    footer a {
+    #footer a {
       color: #1d9bf0;
       text-decoration: none;
       font-weight: bold;
@@ -114,21 +114,18 @@
 </head>
 <body>
   <h1>やりたい事リスト（ジャンル選択＋年代別）</h1>
-
   <div class="quote-box" id="quoteBox"></div>
-
   <div class="quick-form">
     <label for="quickTitle">やりたいこと（まずはこれだけでOK）</label>
     <input type="text" id="quickTitle" placeholder="例：モルディブに行く">
     <button onclick="quickAdd()">追加</button>
   </div>
-
   <div class="bucket-section" id="bucketList"></div>
-
-  <footer>
-    <p><a href="https://twitter.com/kkp_webninja" target="_blank">@kkp_webninja</a><br><small>ウェブアプリをお届け</small></p>
-  </footer>
-
+  <div id="footer">
+    X <a href="https://x.com/kkp_webninja" target="_blank">@kkp_webninja</a> <br>
+    🏯 <a href="https://kkpwebninja.com" target="_blank">web忍者の本丸</a><br>
+    各巻物（アプリ）の入り口は本丸ページに集めているでござる。
+  </div>
   <script>
     const quoteBox = document.getElementById("quoteBox");
     const quickTitle = document.getElementById("quickTitle");
@@ -228,18 +225,16 @@
     }
 
     function remove(index) {
-      if (confirm("本当に削除しますか？")) {
-        data.splice(index, 1);
-        saveData();
-        render();
-      }
+      data.splice(index, 1);
+      saveData();
+      render();
     }
 
     function renderShareLink(index) {
       const item = data[index];
       const shareDiv = document.getElementById("share" + index);
       const text = encodeURIComponent(
-        `${item.done ? `✅「${item.title}」達成！` : `📝「${item.title}」をやりたいことに追加！`}\\n\\n#やりたいことリスト\\n#タイムバケット\\nhttps://kkp-15.github.io/ninja-bucketlist/`
+        `${item.done ? `✅「${item.title}」達成！` : `📝「${item.title}」をやりたいことに追加！`}\n\n#やりたいことリスト\n#タイムバケット\nhttps://kkp-15.github.io/ninja-bucketlist/`
       );
       shareDiv.innerHTML = `<a href="https://twitter.com/intent/tweet?text=${text}" target="_blank">Xでシェア</a>`;
     }
